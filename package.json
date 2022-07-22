@@ -1,0 +1,25 @@
+{
+  "name": "node-tutorials",
+  "version": "1.0.0",
+  "description": "Learning NodeJs",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nitin094-hub/Learning-NodeJs-Express-.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nitin094-hub/Learning-NodeJs-Express-/issues"
+  },
+  "homepage": "https://github.com/nitin094-hub/Learning-NodeJs-Express-#readme",
+  "dependencies": {
+    "slugify": "^1.6.5"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.19"
+  }
+}

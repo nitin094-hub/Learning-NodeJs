@@ -1,6 +1,9 @@
 const fs = require("fs");
 const http = require("http");
 const url = require("url");
+const slugify = require("slugify");
+
+console.log(slugify("fresh avacados", { lower: true }));
 
 // //////////////////////////FILES
 
@@ -39,28 +42,27 @@ const url = require("url");
 //   console.log("Server is Running");
 // });
 
+const server = http.createServer((req, res) => {
+  const path = req.url;
+  // console.log(url.parse(req.url,true));
+  const { query, pathname } = url.parse(req.url, true);
+  console.log(query.id, pathname);
+  if (path === "/" || path === "/overview") {
+    fs.readFile(`${__dirname}/dev-data/data.json`, "utf-8", (err, data) => {
+      // const product = JSON.parse(data);
+      res.writeHead(200, {
+        "Content-type": "application/json",
+      });
+      res.end(data);
+    });
+  } else {
+    res.writeHead(404, {
+      "Content-type": "application/json",
+    });
+    res.end("Not Found");
+  }
+});
 
-const server = http.createServer((req,res)=>{
-    const path = req.url;
-    console.log(path);
-    if(path==="/" || path==="/overview"){
-        fs.readFile(`${__dirname}/dev-data/data.json`,"utf-8",(err,data)=>{
-            // const product = JSON.parse(data);
-            res.writeHead(200,{
-                "Content-type":"application/json"
-            })
-            res.end(data)
-        })
-    }
-    else{
-        res.writeHead(404,{
-            "Content-type":"application/json"
-        })
-        res.end("Not Found")
-        
-    }
-})
-
-server.listen(8000,"127.0.0.1",()=>{
-    console.log("Server is Running");
-})
+server.listen(8000, "127.0.0.1", () => {
+  console.log("Server is Running");
+});
