@@ -3,7 +3,7 @@ const http = require("http");
 const url = require("url");
 const slugify = require("slugify");
 
-console.log(slugify("fresh avacados", { lower: true }));
+// console.log(slugify("fresh avacados", { lower: true }));
 
 // //////////////////////////FILES
 
@@ -46,10 +46,13 @@ const server = http.createServer((req, res) => {
   const path = req.url;
   // console.log(url.parse(req.url,true));
   const { query, pathname } = url.parse(req.url, true);
-  console.log(query.id, pathname);
+  // console.log(query.id, pathname);
   if (path === "/" || path === "/overview") {
     fs.readFile(`${__dirname}/dev-data/data.json`, "utf-8", (err, data) => {
-      // const product = JSON.parse(data);
+      if (err) {
+        res.writeHead("404");
+        res.end("Not Found");
+      }
       res.writeHead(200, {
         "Content-type": "application/json",
       });
